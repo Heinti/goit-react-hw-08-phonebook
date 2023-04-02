@@ -1,8 +1,8 @@
 // import PropTypes from 'prop-types';
 import css from '../Filter/Filter.module.css';
-import {getFilterDataValue} from '../redux/selectors'
+import {getFilterDataValue} from '../../redux/selectors'
 import { useDispatch, useSelector } from 'react-redux';
-import { getFilterValue } from '../redux/filterSlice';
+import { getFilterValue } from '../../redux/filterSlice';
 
 
 export const Filter = () => {
