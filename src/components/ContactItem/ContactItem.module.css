@@ -1,7 +1,37 @@
-.list__li{
-    list-style: none;
+.item {
+    display: flex;
+    align-items: center;
+    max-width: 500px;
+    justify-content: space-between;
 }
 
-.list__Btn{
-    margin-left: 10px;
+.description {
+    min-width: 300px;
+    padding: 0;
+    margin: 0;
+}
+
+.name {
+    font-weight: 700;
+    margin-right: 5px;
+}
+
+.btn {
+    min-width: 100px;
+    height: 30px;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 18px;
+
+    color: var(--light-txt-color);
+    box-shadow: var(--btn-shadow);
+    border: none;
+    border-radius: 6px;
+    background-color: var(--btn-bg-color);
+    transition: background-color var(--main-animation)
+}
+
+.btn:hover,
+.btn:focus {
+    background-color: var(--btn-hover-bg-color);
 }

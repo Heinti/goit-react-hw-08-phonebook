@@ -1,43 +1,30 @@
-// import PropTypes from 'prop-types';
-// import css from '../ContactList/ContactList.module.css';
-import { ContactItem } from 'components/ContactItem/ContactItem';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { getContacts, getFilterDataValue } from 'redux/selectors';
-import { deleteContact } from '../../redux/operators';
+import { selectContacts } from '../../redux/contacts/selectors';
+import ContactItem from '../ContactItem/ContactItem';
+import css from './ContactList.module.css'
 
-export const ContactList = () => {
+const ContactList = () => {
+  const contacts = useSelector(selectContacts)
+  const filter = useSelector(state => state.filter);
 
-  const dispatch = useDispatch();
+  const filterontacts = getFilterContacts();
 
-  const contacts = useSelector(getContacts);
-  const filter = useSelector(getFilterDataValue);
+  function getFilterContacts() {
+const lowercaseFilter = filter.toLowerCase();
 
-  const getvisibleContacts = () => {
-    const toLowerCaseName = filter.toLowerCase();
+return contacts.filter(contact =>
+  contact.name.toLowerCase().includes(lowercaseFilter)
+);
+  }
 
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(toLowerCaseName)
-    );
-  };
-
-
-  const deleteContactFormData = dataId => {
-    dispatch(deleteContact(dataId));
-  };
-
-  const visibleContacts = getvisibleContacts();
   return (
-    <section>
-      <ul>
-        {visibleContacts.map(({ id, name, phone }) => (
-          <ContactItem
-            key={id}
-            data={{ id, name, phone }}
-            onDelete={deleteContactFormData}
-          />
-        ))}
-      </ul>
-    </section>
+    <ul className={css.list}>
+      {filterontacts.map(({ id, name, number }) => (
+        <ContactItem key={id} contact={{ id, name, number }} />
+      ))}
+    </ul>
   );
 };
+
+export default ContactList;

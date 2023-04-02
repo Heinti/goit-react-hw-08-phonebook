@@ -19,22 +19,22 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   extraReducers: {
-    [register.fulfilled](state, { payload }) {
-      state.user = payload.user;
-      state.token = payload.token;
+    [register.fulfilled](state, action) {
+      state.user = action.payload.user;
+      state.token = action.payload.token;
       state.isLoggedIn = true;
     },
-    [logIn.fulfilled](state, { payload }) {
-      state.user = payload.user;
-      state.token = payload.token;
+    [logIn.fulfilled](state, action) {
+      state.user = action.payload.user;
+      state.token = action.payload.token;
       state.isLoggedIn = true;
     },
-    [logIn.rejected]() {
+    [logIn.rejected](state, action) {
       Notify.failure(
         'Sorry, there is no user with this email.Verify your email and password and try again '
       );
     },
-    [logOut.fulfilled](state) {
+    [logOut.fulfilled](state, action) {
       state.user = { name: null, email: null };
       state.token = null;
       state.isLoggedIn = false;
@@ -42,8 +42,8 @@ const authSlice = createSlice({
     [refreshUser.pending](state) {
       state.isRefreshing = true;
     },
-    [refreshUser.fulfilled](state, { payload }) {
-      state.user = payload;
+    [refreshUser.fulfilled](state, action) {
+      state.user = action.payload;
       state.isLoggedIn = true;
       state.isRefreshing = false;
     },
